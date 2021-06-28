@@ -6,7 +6,7 @@ import (
 	"unsafe"
 )
 
-func main() {
+func main1() {
 	var s1 []int
 	s2 := make([]int, 0)
 	s4 := make([]int, 0)
