@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 func main() {
 	var ints []int
@@ -23,4 +26,19 @@ func main() {
 	*ps = append(*ps, "eggo")
 	fmt.Printf("ps : %v , %p \n", ps, ps)
 	fmt.Printf("ps : %v , %p len:%v cap:%v \n", ints2, ints2, len(*ps), cap(*ps))
+
+	arr := make([]int,3 ,3)
+	for i := 0; i < 3; i++ {
+		//fmt.Println(arr[i])
+		go func(i int,arr []int) {
+			if i%2 == 0 {
+				arr[i] = i+1
+			}else{
+				arr[i]= i+1
+			}
+			fmt.Println(i)
+		}(i,arr)
+	}
+	time.Sleep(3*time.Second)
+	fmt.Println(arr)
 }
