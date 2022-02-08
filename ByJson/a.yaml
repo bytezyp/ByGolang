@@ -1,0 +1,747 @@
+app:
+  #头条相关配置
+  ocean:
+    qtt_blacklist_switch: true
+    caidan_blacklist_switch: true
+    recall_cache_time: 900
+    new_cache_time: 3600
+    cache_time_hit: 900
+    cache_time_miss: 3600
+    switch_strategies:
+      - cheatdevice
+    app_strageties:
+      #      - 拉新----------------
+      - strategy_user_ids: [ 10100,10187 ]
+        shield_strageties:
+          - app: qtt
+            type: new
+            defalut: true
+      #          - type: coin
+      #            parameter: 2:-1
+      - strategy_user_ids: [ 10115 ]
+        shield_strageties:
+          - app: midu
+            type: new
+            default: true
+          - app: midujisu
+            type: new
+            default: true
+      #          - type: coin
+      #            parameter: 2:-1
+      - strategy_user_ids: [ 10116,10378 ]
+        shield_strageties:
+          - app: midujisu
+            type: new
+            default: true
+          - app: midu
+            type: onlyactiverecall
+            option: less
+            parameter: 30
+            default: true
+      #          - type: coin
+      #            parameter: 2:-1
+      - strategy_user_ids: [ 10226,10297 ]
+        shield_strageties:
+          - app: caidan
+            type: new
+            default: true
+      #          - type: coin
+      #            parameter: 2:-1
+
+      - strategy_user_ids: [ 10292,10328 ]
+        shield_strageties:
+          - app: qring
+            type: new
+            default: true
+      - strategy_user_ids: [ 10329 ]
+        shield_strageties:
+          - app: qclean
+            type: new
+            default: true
+      #TODO 这个7和其他渠道不一样
+      - strategy_user_ids: [ 12690 ]
+        shield_strageties:
+          - app: flyreader
+            type: new
+            default: true
+          - app: midu
+            type: onlyactiverecall
+            option: less
+            parameter: 7
+            default: true
+          - app: midujisu
+            type: onlyactiverecall
+            option: less
+            parameter: 7
+            default: true
+          - app: mdxs
+            type: onlyactiverecall
+            option: less
+            parameter: 7
+            default: true
+
+      - strategy_user_ids: [ 10380 ]
+        shield_strageties:
+          - app: qtt
+            type: recallcontinue
+            option: between
+            parameter: 1:0?14
+            default: false
+
+
+      #      - 拉活recall----------------
+      #      屏蔽2日内的qtt活跃
+      - strategy_user_ids: [ 10117 ]
+        shield_strageties:
+          - app: qtt
+            type: active
+            option: less
+            parameter: 1
+            default: true
+
+      # recall 屏蔽midujisu 3日内和61天外活跃，只对3-60天内活跃拉活 midujs_recall_advertisers
+      - strategy_user_ids: [ 10538 ]
+        shield_strageties:
+          - app: midujisu
+            type: active
+            option: lessequal
+            parameter: 1
+            default: true
+          - app: midujisu
+            type: active
+            option: greater
+            parameter: 58
+            default: true
+
+      #            recall
+      - strategy_user_ids: [ 10539 ]
+        shield_strageties:
+          - app: midu
+            type: active
+            option: lessequal
+            parameter: 1
+            default: true
+          - app: midu
+            type: active
+            option: greater
+            parameter: 58
+            default: true
+      - strategy_user_ids: [ 12589 ]
+        shield_strageties:
+          - app: mdxs
+            type: active
+            option: less
+            parameter: 2
+            default: true
+      #            混合拉新onlyactiverecall----------------
+      #            shield_qtt_180active_advertisers
+      - strategy_user_ids: [ 10330 ]
+        shield_strageties:
+          - app: qtt
+            type: onlyactiverecall
+            option: less
+            parameter: 59
+            default: true
+      #            shield_midujs_90active_advertisers 属于混合拉新，不判断exist
+      - strategy_user_ids: [ 11345 ]
+        shield_strageties:
+          - app: midujisu
+            type: onlyactiverecall
+            option: less
+            parameter: 59
+            default: true
+      #            shield_midujs_7active_advertisers
+      - strategy_user_ids: [ 11520 ]
+        shield_strageties:
+          - app: midujisu
+            type: onlyactiverecall
+            option: less
+            parameter: 7
+            default: true
+
+      #            shiled_66multiins
+      - strategy_user_ids: [ 12731 ]
+        shield_strageties:
+          - app: igexclude
+            type: new
+            default: true
+            # 金币coin----------------永远把coin放最后
+      #            shield_3days_active_advertisers
+      - strategy_user_ids: [ 10100,10187, 10226,10297,10116,10378,10115,10294,10321,10379 ]
+        shield_strageties:
+          - app:
+            type: coin
+            option:
+            parameter: 2:-1
+            default: false
+      - strategy_user_ids: [ 10292,10328 ]
+        shield_strageties:
+          - app:
+            type: coin
+            parameter: 1:0
+            default: false
+    bridge:
+      strategy_rate: 500 #万分之
+      qtt_bridge_for_kuaishou:
+        req_rta_rate: 500  #万分之
+        user_ids: [ 10365 ]
+        rta_id: 4
+        url: "http://promotion-partner.kuaishou.com/rest/n/rta/qtt"
+        timeOut: 30
+        adv_user_ids: [ 1804611,1733917,1805513,1811459,1806033,1805514,1804612,1733919,1733918,1804610,1811614,1813597,1809267,1795599,1811452,1811458,1795639,1795617,1795618,1795638,1795619,1807330,1800077,1800303 ]
+        cache_exp_time: 1800 #second
+        refused_cache_exp_time: 1800 #second
+        is_over_time_bid: 1 #参竞：0，不参竞：1
+        t0_active_filter: true
+      qtt_bridge_for_bilibili:
+        req_rta_rate: 500  #万分之
+        user_ids: [ 10365 ]
+        rta_id: 113
+        url: "http://rta.biliapi.com/api/qtt_bidback"
+        timeOut: 30
+        adv_user_ids: [ 1813775,1813807,1814712,1813789 ]
+        cache_exp_time: 1800 #second
+        refused_cache_exp_time: 1800 #second
+        is_over_time_bid: 0 #参竞：0，不参竞：1
+        t0_active_filter: true
+  baidu:
+    qtt_blacklist_switch: true
+    caidan_blacklist_switch: true
+    recall_cache_time: 900
+    new_cache_time: 3600
+    cache_time_hit: 900
+    cache_time_miss: 3600
+    switch_strategies:
+      - cheatdevice
+    app_strageties:
+      #            召回----------------
+      - strategy_user_ids: [ 33333 ]
+        shield_strageties:
+          - app: qtt
+            type: active
+            option: less
+            parameter: 1
+            default: false
+  xiaomi:
+    qtt_blacklist_switch: true
+    caidan_blacklist_switch: true
+    recall_cache_time: 900
+    new_cache_time: 3600
+    cache_time_hit: 900
+    cache_time_miss: 3600
+    switch_strategies:
+      - cheatdevice
+    app_strageties:
+      #            召回----------------
+      - strategy_user_ids: [ abcd ]
+        shield_strageties:
+          - app: qtt
+            type: active
+            option: less
+            parameter: 1
+            default: false
+  huawei:
+    qtt_blacklist_switch: true
+    caidan_blacklist_switch: true
+    recall_cache_time: 900
+    new_cache_time: 3600
+    cache_time_hit: 900
+    cache_time_miss: 3600
+    switch_strategies:
+      - cheatdevice
+    app_strageties:
+      #            召回----------------
+      - strategy_user_ids: [ 33333 ]
+        shield_strageties:
+          - app: qtt
+            type: onlyactiverecall
+            option: less
+            parameter: 1
+            default: false
+  gdt:
+    qtt_blacklist_switch: true
+    caidan_blacklist_switch: true
+    recall_cache_time: 900
+    new_cache_time: 3600
+    cache_time_hit: 900
+    cache_time_miss: 3600
+    switch_strategies:
+      - cheatdevice
+    app_strageties:
+      #            拉新new----------------
+      - strategy_user_ids: [ 10080 ]
+        shield_strageties:
+          - app: qclean
+            type: new
+            default: true
+      - strategy_user_ids: [ 10050 ]
+        shield_strageties:
+          - app: qtt
+            type: new
+            default: true
+      - strategy_user_ids: [ 10053,10057 ]
+        shield_strageties:
+          - app: caidan
+            type: new
+            default: true
+      - strategy_user_ids: [ 10052,10085 ]
+        shield_strageties:
+          - app: midujisu
+            type: new
+            default: true
+          - app: midu
+            type: onlyactiverecall
+            option: less
+            parameter: 30
+            default: true
+      - strategy_user_ids: [ 10079 ]
+        shield_strageties:
+          - app: qring
+            type: new
+            default: true
+      #      - 拉活recall----------------
+      #      屏蔽2日内的qtt活跃
+      - strategy_user_ids: [ 10051 ]
+        shield_strageties:
+          - app: qtt
+            type: active
+            option: less
+            parameter: 1
+            default: false
+      # recall 屏蔽midujisu 3日内和61天外活跃，只对3-60天内活跃拉活
+      - strategy_user_ids: [ 10054 ]
+        shield_strageties:
+          - app: midujisu
+            type: active
+            option: lessequal
+            parameter: 1
+            default: false
+          - app: midujisu
+            type: active
+            option: greater
+            parameter: 58
+            default: false
+      #            recall
+      #      - strategy_user_ids: [ 10055 ]
+      #        shield_strageties:
+      #          - app: midujisu
+      #            type: new
+      #          - app: midu
+      #            type: active
+      #            option: lessequal
+      #            parameter: 1
+      #          - app: midu
+      #            type: active
+      #            option: greater
+      #            parameter: 58
+      #          mdxs_recall_advertisers
+      - strategy_user_ids: [ 10105 ]
+        shield_strageties:
+          - app: mdxs
+            type: active
+            option: less
+            parameter: 2
+            default: true
+      #            混合拉新onlyactiverecall----------------
+      #            shield_qtt_180active_advertisers
+      - strategy_user_ids: [ 10066 ]
+        shield_strageties:
+          - app: qtt
+            type: onlyactiverecall
+            option: less
+            parameter: 59
+            default: true
+      #            shield_midujs_90active_advertisers 属于混合拉新，不判断exist
+      - strategy_user_ids: [ 10100 ]
+        shield_strageties:
+          - app: midujisu
+            type: onlyactiverecall
+            option: less
+            parameter: 59
+            default: true
+      #  qjp_mix_new_shield_days qjp_mix_new_shield_advertisers 混合拉新怎么处理！！！
+      - strategy_user_ids: [ 10104 ]
+        shield_strageties:
+          - app: qujianpan
+            type: onlyactiverecall
+            option: less
+            parameter: 179
+            default: true
+
+      - strategy_user_ids: [1111 ]
+        shield_strageties:
+          - app: qtt
+            type: bridge
+            option: less
+            parameter: 1
+            default: false
+
+      # 屏蔽fdxs TODO: 不能配active因为如果有一个app没安装，就屏蔽了， 此时只考虑如果有活跃时间，那他活跃是否在屏蔽范围内，所以用 onlyactiverecall
+      - strategy_user_ids: [ 10106 ]
+        shield_strageties:
+          - app: midu
+            type: onlyactiverecall
+            option: less
+            parameter: 7
+            default: true
+          - app: midujisu
+            type: onlyactiverecall
+            option: less
+            parameter: 7
+            default: true
+          - app: mdxs
+            type: onlyactiverecall
+            option: less
+            parameter: 7
+            default: true
+          - app: flyreader
+            type: new
+            default: true
+
+      #            other_new_advertisers: [10096,10084,10095,10066]
+      - strategy_user_ids: [ 10096,10084,10095 ]
+        shield_strageties:
+          - app:
+            type: adddirectly
+            default: true
+            # 金币coin----------------
+      #            shield_3days_active_advertisers
+      - strategy_user_ids: [ 10050,10053,10057,10096,10052,10085,10084,10095 ]
+        shield_strageties:
+          - app:
+            type: coin
+            option:
+            parameter: 2:-1
+            default: false
+      #            shield_1days_active_advertisers 满足一个条件就屏蔽
+      - strategy_user_ids: [ 10079 ]
+        shield_strageties:
+          - app:
+            type: coin
+            parameter: 1:0
+            default: false
+            # 持续拉活recallcontinue----------------
+      #  qtt_recall_continue_advertisers,2日内
+      - strategy_user_ids: [ 1814377,1814011 ]
+        shield_strageties:
+          - app: qtt
+            type: recallcontinue
+            option: between
+            parameter: 1:0?13
+            default: true
+      #  qtt_recall_continue_advertisers,20点
+      - strategy_user_ids: [ 10380 ]
+        shield_strageties:
+          - app: qtt
+            type: recallcontinue
+            option: less
+            parameter: 1?14
+            default: true
+    bridge:
+      strategy_rate: 2000 #万分之
+      qtt_bridge_for_kuaishou:
+        req_rta_rate: 2000  #万分之
+        user_ids: [ 10101 ]
+        rta_id: 4
+        url: "http://promotion-partner.kuaishou.com/rest/n/rta/qtt"
+        timeOut: 30
+        adv_user_ids: [ 1804611,1733917,1805513,1811459,1806033,1805514,1804612,1733919,1733918,1804610,1811614,1813597,1809267,1795599,1811452,1811458,1795639,1795617,1795618,1795638,1795619,1807330,1800077,1800303 ]
+        cache_exp_time: 1800 #second
+        refused_cache_exp_time: 1800 #second
+        is_over_time_bid: 1 #参竞：0，不参竞：1
+        t0_active_filter: true
+      qtt_bridge_for_bilibili:
+        req_rta_rate: 2000  #万分之
+        user_ids: [ 10101 ]
+        rta_id: 113
+        url: "http://rta.biliapi.com/api/qtt_bidback"
+        timeOut: 30
+        adv_user_ids: [ 1813775,1813807,1814712,1813789 ]
+        cache_exp_time: 1800 #second
+        refused_cache_exp_time: 1800 #second
+        is_over_time_bid: 1 #参竞：0，不参竞：1
+        t0_active_filter: true
+
+  #快手相关配置
+  kuaishou:
+    cache_time_hit: 900
+    cache_time_miss: 3600
+    switch_strategies:
+      - cheatdevice
+    app_strageties:
+      #      - 拉新----------------
+      - strategy_user_ids: [ 9847594,9847559 ]
+        shield_strageties:
+          - app: qtt
+            type: new
+            default: true
+            #            拉新米速有很多屏蔽条件
+      - strategy_user_ids: [ 1532340,1420368,2295612,2949450,3403618,3146196,2291129,2894332,3417671,3399583,3427949,3507215,3399583,3427949,3507215,2291668,36175,49036,3584940,3584995,3641858,3643163,3643233,3029750,3728197,3728128,3822613,2150888,7683895,3585816,3735992,3851836,8022829,9555246,9555233,8123307,8171571,8178098,8178088,9646472,9646424,9646391,9646382,8230480,2320254,9750011,9750019,9750036,9747868,9747877,9748212,9748241,9646391 ]
+        shield_strageties:
+          - app: midujisu
+            type: new
+            default: true
+          - app: midu
+            type: onlyactiverecall
+            option: less
+            parameter: 30
+            default: true
+      - strategy_user_ids: [ 5805009,2943273,5808151 ]
+        shield_strageties:
+          - app: caidan
+            type: new
+            default: true
+      - strategy_user_ids: [ 6561797,6386286,6852966,6852953,6629900,6630026,6986097 ]
+        shield_strageties:
+          - app: qclean
+            type: new
+            default: true
+      #            fdxs
+      - strategy_user_ids: [ 10157614,10157613,10157612,10157611,10157190,10157191,10157192,10157194,10157207,10157208,10157209,10157210,10272407,10272408,10266703,10265469,10265468,10265467,10295984,10295985,10295986,10295987,10296002,10296005,10296006,10296008 ]
+        shield_strageties:
+          - app: flyreader
+            type: new
+            default: false
+          - app: midu
+            type: onlyactiverecall
+            option: less
+            parameter: 7
+            default: true
+          - app: midujisu
+            type: onlyactiverecall
+            option: less
+            parameter: 7
+            default: true
+          - app: mdxs
+            type: onlyactiverecall
+            option: less
+            parameter: 7
+            default: true
+      #            shiled_66multiins
+      - strategy_user_ids: [ 10879904 ]
+        shield_strageties:
+          - app: igexclude
+            type: new
+            default: true
+          #      - recall----------------
+          #      屏蔽2日内的qtt活跃
+      - strategy_user_ids: [ 9928753 ]
+        shield_strageties:
+          - app: qtt
+            type: active
+            option: less
+            parameter: 1
+            default: true
+      - strategy_user_ids: [ 10564887,10531239 ]
+        shield_strageties:
+          - app: mdxs
+            type: active
+            option: less
+            parameter: 1
+            default: true
+      #            米速的拉活
+      - strategy_user_ids: [ 10175527,10302551,10536918,10556924]
+        shield_strageties:
+          - app: midujisu
+            type: active
+            option: lessequal
+            parameter: 1
+            default: true
+
+
+      #            混合拉新onlyactiverecall----------------
+      #            shield_qtt_180active_advertisers
+      - strategy_user_ids: [ 7568017,7676299,7782284,8151860,8151838,8151809,7913516,7614918,8122518,7614946,8165894,7913542,9584817,9584813,9584797,7984168,8214300,7782246,8157141,8201181,8201027,9586064,1029620,9616834,9616823,8157175,7676365,8180132,8180146,8216162,9663650,9663597,9665846,9665839,9665794,9662601,9726314,9726273,9751506,9751512,9751535,9936071,9936085,9930217,9930216,9930199,9946492,9946494,9947144,9972024,9972016,9977338,9977322,9978955,9978952,9978941,9936112,9936161,10022473,10025320,10025324,10057424,10057284,19300957 ]
+        shield_strageties:
+          - app: qtt
+            type: onlyactiverecall
+            option: less
+            parameter: 59
+            default: true
+      - strategy_user_ids: [ 8059180,8059151,9751691,9751685,9751678,9760798,9760770,10060496,10004635,9934351,9927918 ]
+        shield_strageties:
+          - app: midujisu
+            type: onlyactiverecall
+            option: less
+            parameter: 59
+            default: true
+      #            mdxs混合新增
+      - strategy_user_ids: [ 9812037,9811918,9811843,9811835,9834888,9834892,9834944,9834952,9836248,9836233,9836232,9836227,9857587,9990946,9990972,9990974,9990975,9885423,9811843,9885562,9885532,9955314 ]
+        shield_strageties:
+          - app: midujisu
+            type: onlyactiverecall
+            option: less
+            parameter: 7
+            default: true
+      #            qjp_mix_new_shield_advertisers
+      - strategy_user_ids: [ 9919933,9975256,9975273 ]
+        shield_strageties:
+          - app: qujianpan
+            type: onlyactiverecall
+            option: less
+            parameter: 179
+            default: true
+  # timeline  30             1          0
+  #           30D before   yesterday  today
+  # 活跃时间 greater 1 是  activetime > 1 即，活跃时间1天前的都屏蔽
+  #between 1:30 在距离今天1-30天活跃的，将屏蔽这个策略
+  #deprecated 1 for 是否安装，拉新 2 for 屏蔽拉活 3 for 连续拉活 4 for 低质用户 5 for 是否激活
+
+  # 是否生效， 前端输入校验
+  cpc:
+    switch_strategies:
+      - cheatdevice
+    app_strageties:
+      #      - 拉新----------------
+      - strategy_user_ids: [ 1747793,1747792,1747790,1765678 ]
+        shield_strageties:
+          - app: qtt
+            type: new
+            default: true
+      #            拉新米读有很多屏蔽条件
+      - strategy_user_ids: [ 2,1795538,1795539,1795542,1795543 ]
+        shield_strageties:
+          - app: midu
+            type: new
+            default: true
+          - app: midujisu
+            type: new
+            default: true
+            #            拉新米速有很多屏蔽条件
+      #            TODO: 这个屏蔽30天就没考虑exist
+      - strategy_user_ids: [ 1816360,1816362,1674151,1674153,1674502,1773558,1773561,1779176,1779179,1789219,1789221,1789224,1789227,1781815,1781817,1819795,1821444,1821445,1821446,1822707,1822708,1822709,1822710]
+        shield_strageties:
+          - app: midujisu
+            type: new
+            default: true
+          - app: midu
+            type: onlyactiverecall
+            option: less
+            parameter: 30
+            default: true
+      - strategy_user_ids: [ 1748073,1748215,1750400,1752598,1752618,1756605,1756612,1759399,1759402,1773953,1773959,1795414,1795417,1795418,1795421,1803629,1803633,1803634,1803642,1803650 ]
+        shield_strageties:
+          - app: caidan
+            type: new
+            default: true
+      - strategy_user_ids: [ 1748083,1750956,1749281,1756626,1756619 ]
+        shield_strageties:
+          - app: qring
+            type: new
+            default: true
+      - strategy_user_ids: [ 1748086,1750403,1751483,1754532,1754536 ]
+        shield_strageties:
+          - app: qclean
+            type: new
+            default: true
+      - strategy_user_ids: [ 1779666,1805941,1805937,1805932,1781063,1779668 ]
+        shield_strageties:
+          - app: zrqs
+            type: new
+            default: true
+      - strategy_user_ids: [ 1756640,1789229,1767865,1789228,1779664,1750981,1779660,1779661,1789232,1789231 ]
+        shield_strageties:
+          - app: dzddz
+            type: new
+            default: true
+      - strategy_user_ids: [ 1767857,1767860,1770639,1770641,1777102,1777107,1781797,1781804,1756257 ]
+        shield_strageties:
+          - app: lthhjsb
+            type: new
+            default: true
+      - strategy_user_ids: [ 1795873 ]
+        shield_strageties:
+          - app: mengtui
+            type: new
+            default: true
+      - strategy_user_ids: [ 1674117 ]
+        shield_strageties:
+          - app: shihuimiao
+            type: new
+            default: true
+      - strategy_user_ids: [ 1796436,1796440,1795836,1798174 ]
+        shield_strageties:
+          - app: qlove
+            type: new
+            default: true
+      - strategy_user_ids: [ 1816289,1819124,1819787,1819786,1820044,1820045,1820046,1820047,1820048,1822712,1822713,1822714,1822715,1822716 ]
+        shield_strageties:
+          - app: mdxs
+            type: new
+            default: true
+      #            shiled_66multiins
+      - strategy_user_ids: [ 1829302,1829485 ]
+        shield_strageties:
+          - app: igexclude
+            type: new
+            default: true
+          #      - recall----------------
+          #      屏蔽2日内的qtt活跃
+      - strategy_user_ids: [ 1793272 ]
+        shield_strageties:
+          - app: qtt
+            type: active
+            option: less
+            parameter: 1
+            default: true
+      #            这是正常拉活，没有continue
+      - strategy_user_ids: [ 1795412 ]
+        shield_strageties:
+          - app: midujisu
+            type: active
+            option: less
+            parameter: 1
+            default: true
+      - strategy_user_ids: [ 1819789,1822285,1822286 ]
+        shield_strageties:
+          - app: mdxs
+            type: active
+            option: less
+            parameter: 2
+            default: true
+
+      #            混合拉新onlyactiverecall----------------
+      #            shield_qtt_180active_advertisers
+      - strategy_user_ids: [ 1793271,1796952,1796963,1818075,1821443,1822005,1822004,1821980,1821981,1822857,1822877 ]
+        shield_strageties:
+          - app: qtt
+            type: onlyactiverecall
+            option: less
+            parameter: 59
+            default: true
+      - strategy_user_ids: [ 1816548,1818077,1818279,1818391,1819791,1819793,1819795,1820049,1820050,1820051,1820052,1820053,1821448,1822605,1822606,1822607,1822608,1822609,1822711 ]
+        shield_strageties:
+          - app: midujisu
+            type: onlyactiverecall
+            option: less
+            parameter: 59
+            default: true
+            # 持续拉活recallcontinue----------------
+      #  qtt_recall_continue_advertisers,2日内
+      - strategy_user_ids: [ 1814377,1814011 ]
+        shield_strageties:
+          - app: qtt
+            type: recallcontinue
+            option: between
+            parameter: 1:0?20
+            default: true
+      #有拉活和持续拉活的策略
+      - strategy_user_ids: [ 1795407,1795409,1821447 ]
+        shield_strageties:
+          - app: midujisu
+            type: recallandcontinuerecall
+            option: less?between
+            parameter: 1?1:0?18
+            default: true
+      - strategy_user_ids: [ 1795981 ]
+        shield_strageties:
+          - app: midu
+            type: recallandcontinuerecall
+            option: less?between
+            parameter: 1?1:0?20
+            default: true
+      - strategy_user_ids: [ 99999 ]
+        shield_strageties:
+          - app: flyreader
+            type: new
+            default: false

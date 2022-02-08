@@ -9,6 +9,9 @@ func main() {
 	var ints []int
 	fmt.Printf("ints : %v , %p \n", ints, ints)
 	// ints : [] , 0x0
+	ints3 := make([]int, 0, 3)
+	fmt.Printf("ints3 : %v, %v, %v \n", ints3, len(ints3), cap(ints3))
+	// ints3 : [], 0, 3  len:0, cap: 3
 	ints2 := make([]int, 2, 5)
 	fmt.Printf("ints2 : %v , %p len:%v cap:%v \n", ints2, ints2, len(ints2), cap(ints2))
 	// ints2 : [0 0] , 0xc0000ba000 len:2 cap:5
@@ -27,18 +30,18 @@ func main() {
 	fmt.Printf("ps : %v , %p \n", ps, ps)
 	fmt.Printf("ps : %v , %p len:%v cap:%v \n", ints2, ints2, len(*ps), cap(*ps))
 
-	arr := make([]int,3 ,3)
+	arr := make([]int, 3, 3)
 	for i := 0; i < 3; i++ {
 		//fmt.Println(arr[i])
-		go func(i int,arr []int) {
+		go func(i int, arr []int) {
 			if i%2 == 0 {
-				arr[i] = i+1
-			}else{
-				arr[i]= i+1
+				arr[i] = i + 1
+			} else {
+				arr[i] = i + 1
 			}
 			fmt.Println(i)
-		}(i,arr)
+		}(i, arr)
 	}
-	time.Sleep(3*time.Second)
+	time.Sleep(3 * time.Second)
 	fmt.Println(arr)
 }

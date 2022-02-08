@@ -2,16 +2,16 @@ package main
 
 import "ByGolang/ByPackage"
 
-func app()func(string) string  {
+func app() func(string) string {
 	t := "Hi"
 	c := func(b string) string {
-		t = t + " "+b
+		t = t + " " + b
 		return t
 	}
-	return  c
+	return c
 }
 
-func main()  {
+func main1() {
 	//a := app()
 	//b := app()
 	//fmt.Println(a("go"))
