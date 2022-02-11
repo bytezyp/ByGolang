@@ -1,5 +1,6 @@
 package main
 
 func main() {
-	//ants.NewPool()
+	//ants.NewPool()、
+	//atomic.Value{}
 }
