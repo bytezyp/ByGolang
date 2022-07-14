@@ -14,16 +14,25 @@ func (p Int64Slice) Swap(i, j int)      { p[i], p[j] = p[j], p[i] }
 func main() {
 	//m1 := make(map[int]int)
 	//fmt.Println(m1)
-	//m1[11] = 11
-	//m1[12] = 12
-	//m1[14] = 14
-	//m1[13] = 13
+	//m1[1] = 11
+	//m1[2] = 12
+	//m1[4] = 14
+	//m1[3] = 13
 	//
 	//fmt.Println(len(m1))
 	//for v, k := range m1 {
 	//	fmt.Println(v, k)
 	//}
-
+	m2 := make(map[string]map[string]int, 10)
+	m := make(map[string]int, 1)
+	m["111"] = 111
+	m2["a"] = m
+	m3 := make(map[string]int, 1)
+	m3["222"] = 222
+	m2["b"] = m3
+	for s, m4 := range m2 {
+		fmt.Println(s, m4)
+	}
 	//m2 := make(map[string][]int, 1470000)
 	//arr := make([]int,0,10)
 	//fmt.Printf("slice size: %d\n", unsafe.Sizeof(arr))

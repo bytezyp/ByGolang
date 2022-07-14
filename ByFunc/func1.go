@@ -3,6 +3,9 @@ package main
 import "fmt"
 
 func main() {
+	a := false && false || true || true
+	fmt.Println(a)
+	return
 	array := [][]int{{1, 2}, {3}, {4, 5}}
 	result := sortAll(array)
 	fmt.Println(result)

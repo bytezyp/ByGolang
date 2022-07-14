@@ -12,6 +12,7 @@ func app() func(string) string {
 }
 
 func main1() {
+
 	//a := app()
 	//b := app()
 	//fmt.Println(a("go"))

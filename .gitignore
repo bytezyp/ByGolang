@@ -6,6 +6,7 @@
 /storage/debugbar
 /vendor
 /.idea
+/.DS_Store
 /.vscode
 /.vagrant
 /.php_cs.cache

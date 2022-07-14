@@ -89,7 +89,7 @@ func UnmarshalFile(name string, obj interface{}) error {
 	decoder := yaml.NewDecoder(bytes.NewReader(content))
 	return decoder.Decode(obj)
 }
-func main() {
+func main4() {
 	UnmarshalFile("a.yaml", GConfigV3)
 	fmt.Println(GConfigV3.AppConf.XiaomiConf.AppStrategies[0].StrategyUserIds[0])
 	fmt.Printf("%T", GConfigV3.AppConf.XiaomiConf.AppStrategies[0].StrategyUserIds[0])

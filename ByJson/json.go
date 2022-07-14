@@ -15,7 +15,7 @@ func GetStringArrMd5(strArr []string) string {
 	return hex.EncodeToString(md5hash.Sum(nil))
 }
 
-func main2() {
+func main() {
 	var data = []byte(`{"status":200}`)
 	var result map[string]interface{}
 	if err := json.Unmarshal(data, &result); err != nil {

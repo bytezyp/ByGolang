@@ -9,13 +9,13 @@ func modifySlice(innerSlice []string) {
 	innerSlice = append(innerSlice, "a")
 	innerSlice[0] = "b"
 	innerSlice[1] = "b"
-	fmt.Println(innerSlice, len(innerSlice),cap(innerSlice))
+	fmt.Println(innerSlice, len(innerSlice), cap(innerSlice))
 }
 func main() {
-	outerSlice:= make([]string, 0, 3)
+	outerSlice := make([]string, 0, 1)
 	outerSlice = append(outerSlice, "a", "a")
 	modifySlice(outerSlice)
-	fmt.Println(outerSlice,len(outerSlice),cap(outerSlice))
+	fmt.Println(outerSlice, len(outerSlice), cap(outerSlice))
 	return
 	var ints []int
 	fmt.Printf("ints : %v , %p \n", ints, ints)
