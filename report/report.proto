@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package report;
+
+option csharp_namespace = "Qihoo.Sdk_push.Report";
+option go_package = "report";
+option java_package = "net.qihoo.sdk_push";
+option java_outer_classname = "Report";
+option java_multiple_files = false;
+option objc_class_prefix = "QSDKP";
+
+enum Product {
+    UNKOWN      = 0;    // 未知产品
+    ANDROID_SDK = 1;    // 安卓版SDK
+    IOS_SDK     = 2;    // iOS版SDK
+}
+
+// 上报消息类型，留出后期扩展的空间
+enum Type {
+    UNKNOWN         = 0;    // 未知消息
+    GAME_START      = 10;   // 游戏启动
+    LOGIN_INIT      = 20;   // 登录发起
+    LOGIN_SUCC      = 21;   // 登录成功
+    LOGIN_SUBMIT    = 22;   // 登录提交
+    PAY_INIT        = 30;   // 支付发起
+    PAY_SUCC        = 31;   // 支付成功
+    PAY_SUBMIT      = 32;   // 支付提交
+    HEARTBEAT       = 40;   // 心跳，用于统计游戏时长等
+    HEARTBEAT_STOP  = 41;   // 停止心跳
+    BI_DATA         = 50;   // 独代游戏相关数据
+}
+
+// 数据上报消息结构
+message ReportRequestBody {
+    Product product                 = 1;    // 产品类型
+    Type type                       = 2;    // 上报消息类型
+    uint32 version                  = 3;    // 版本控制
+    int64 timestamp                 = 4;    // 时间戳，用于防重放攻击
+    map<string, string> payload     = 5;    // 上报数据内容
+}
+
+// 数据上报响应结构
+message ReportResponseBody {
+  int32 ok                  = 1;    // 是否成功
+  string errmsg             = 2;    // 错误信息
+  map<string, string> data  = 3;    // 下行数据内容
+}

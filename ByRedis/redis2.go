@@ -1,10 +1,14 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"github.com/go-redis/redis/v7"
+	redisv8 "github.com/go-redis/redis/v8"
+	"gitlab.ushareit.me/ads/architecture/golib.git/redis_client"
 	"strconv"
 	"strings"
+	"time"
 )
 
 var (
@@ -76,14 +80,31 @@ func batchGet() {
 	//}
 
 }
+func Init() {
 
+	redis1, _ := redis_client.CreateRedisClientV8(&redisv8.ClusterOptions{
+		Addrs:        []string{"test.adshonor.ads.sg1.redis:6379"},
+		Password:     "",
+		DialTimeout:  time.Duration(1000) * time.Millisecond,
+		WriteTimeout: time.Duration(1000) * time.Millisecond,
+		ReadTimeout:  time.Duration(1000) * time.Millisecond,
+		PoolTimeout:  time.Duration(1000) * time.Millisecond,
+		ReadOnly:     true,
+		PoolSize:     50,
+	})
+	ctx := context.TODO()
+	redis1.SetNX(ctx, "test_dep", "123", time.Duration(100)*time.Second).Result()
+	ttl, _ := redis1.TTL(ctx, "test_dep").Result()
+	fmt.Println(ttl)
+}
 func main() {
+	Init()
+	return
 	//pip := client.Pipeline()
 	//cmds := make([]*redis.BoolCmd, 2)
 	//cmds[0] = pip.HSet("key", "qtt")
 	//cmds[1] = pip.Expire("key", 600)
 	//_, err = pip.Exec()
-
 	mm := make(map[string]interface{}, 2)
 	mm["11"] = "1111"
 	for _, i := range mm {

@@ -1,13 +1,16 @@
 package main
 
 import (
+	"fmt"
 	"github.com/spaolacci/murmur3"
 	"time"
 )
 
 func main() {
 	println(TodayTimestamp())
-	IsHitExperiment("123", 1)
+	t := time.Now().AddDate(0, 0, -7).Format("2006-01-02 00:00:00")
+	fmt.Println(t)
+	//IsHitExperiment("123", 1)
 }
 
 func TodayTimestamp() int64 {

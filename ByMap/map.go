@@ -12,6 +12,14 @@ func (p Int64Slice) Len() int           { return len(p) }
 func (p Int64Slice) Less(i, j int) bool { return p[i] < p[j] }
 func (p Int64Slice) Swap(i, j int)      { p[i], p[j] = p[j], p[i] }
 func main() {
+	m := make(map[string]struct{}, 2)
+	m["11"] = struct{}{}
+	m["22"] = struct{}{}
+	for s, _ := range m {
+		fmt.Printf("key:%s ", s)
+	}
+	fmt.Printf("%v", m)
+	return
 	//m1 := make(map[int]int)
 	//fmt.Println(m1)
 	//m1[1] = 11
@@ -23,16 +31,16 @@ func main() {
 	//for v, k := range m1 {
 	//	fmt.Println(v, k)
 	//}
-	m2 := make(map[string]map[string]int, 10)
-	m := make(map[string]int, 1)
-	m["111"] = 111
-	m2["a"] = m
-	m3 := make(map[string]int, 1)
-	m3["222"] = 222
-	m2["b"] = m3
-	for s, m4 := range m2 {
-		fmt.Println(s, m4)
-	}
+	//m2 := make(map[string]map[string]int, 10)
+	//m := make(map[string]int, 1)
+	//m["111"] = 111
+	//m2["a"] = m
+	//m3 := make(map[string]int, 1)
+	//m3["222"] = 222
+	//m2["b"] = m3
+	//for s, m4 := range m2 {
+	//	fmt.Println(s, m4)
+	//}
 	//m2 := make(map[string][]int, 1470000)
 	//arr := make([]int,0,10)
 	//fmt.Printf("slice size: %d\n", unsafe.Sizeof(arr))

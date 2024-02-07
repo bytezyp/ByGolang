@@ -1,14 +1,29 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sync/atomic"
+)
+
+func demo() int {
+	return 1111
+
+	defer func() {
+		fmt.Println(3333)
+	}()
+	return 2222
+}
 
 func main() {
-	a := false && false || true || true
-	fmt.Println(a)
-	return
-	array := [][]int{{1, 2}, {3}, {4, 5}}
-	result := sortAll(array)
-	fmt.Println(result)
+	fmt.Println(demo())
+	//a := false && false || true || true
+	//fmt.Println(a)
+	//return
+	//array := [][]int{{1, 2}, {3}, {4, 5}}
+	//result := sortAll(array)
+	//fmt.Println(result)
+	var a atomic.Value
+	a.CompareAndSwap()
 }
 
 func sortAll(array [][]int) [][]int {
